@@ -16,14 +16,17 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\DatePicker;
-
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use App\Models\CashBeneficiary; 
+
 class Duplicates extends Component implements HasTable, HasForms
 {
 
     use interactsWithTable, interactsWithForms;
 
     public $message ;
+    public $data;
     public function render()
     {
         return view('livewire.duplicates');
@@ -31,10 +34,16 @@ class Duplicates extends Component implements HasTable, HasForms
 
     public function check(){
         $this->message = 'hello';
+     // $this->data = CashBeneficiary::select('national_id')->groupBy('national_id')->get();
+       $this->data = DB::table('cash_beneficiaries as cb')
+      ->select('cb.national_id')
+      ->groupBy('cb.national_id')
+      ->get();
+
     }
     public function table (Table $table)  :Table {
 
-        return $table
+        return  $table
         ->query(CashBeneficiary::query())
         ->columns([
             Tables\Columns\TextColumn::make('national_id'),
@@ -44,6 +53,7 @@ class Duplicates extends Component implements HasTable, HasForms
             Tables\Columns\TextColumn::make('transfer_date'),
             Tables\Columns\TextColumn::make('project'),
             Tables\Columns\TextColumn::make('donor'),
-        ]);
+        ])
+        ->groups(['national_id','project']);
     }
 }

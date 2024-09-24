@@ -4,8 +4,9 @@
    <!-- <h1 class="text-xl font-medium"> Hello from livewire </h1>
 --->
 {{$this->message}}
+
 <button wire:click="check"> Show Duplicates </button>
 
+{{$this->data}}
 {{$this->table}}
-
 </div>

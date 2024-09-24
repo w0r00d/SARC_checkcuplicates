@@ -32,7 +32,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->font(family: 'Poppins')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
-            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
+            ->discoverPages(in: app_path('Filament/Pages1'), for: 'App\\Filament\\Pages1')
             ->pages([
                 Pages\Dashboard::class,
             ])
