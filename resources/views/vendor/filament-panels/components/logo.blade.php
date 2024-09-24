@@ -1,0 +1,1 @@
+<img src="{{ asset('storage/images/sarc.png') }}" width="55px">
