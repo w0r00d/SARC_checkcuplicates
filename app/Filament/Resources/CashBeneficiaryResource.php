@@ -17,7 +17,7 @@ class CashBeneficiaryResource extends Resource
 {
     protected static ?string $model = CashBeneficiary::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-user-circle';
 
     public static function form(Form $form): Form
     {
@@ -75,13 +75,16 @@ class CashBeneficiaryResource extends Resource
                 Tables\Columns\TextColumn::make('governate')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('value')
+                    ->numeric()
+                    ->suffix(' SP')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('transfer_date')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('project')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('donor')
-                    ->searchable(),
+                    ->searchable()
+                    ->badge(),
 
             ])
             ->groups(['national_id'])
