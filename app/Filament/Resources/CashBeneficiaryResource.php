@@ -63,6 +63,8 @@ class CashBeneficiaryResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->heading('Beneficaries')
+            ->description('Cash Beneficiaries Data')
             ->headerActions([
                 ImportAction::make()
                     ->importer(CashBeneficiaryImporter::class)
@@ -87,9 +89,12 @@ class CashBeneficiaryResource extends Resource
                     ->badge(),
 
             ])
-            ->groups(['national_id'])
+            ->groups(['national_id',
+                'donor',
+            ])
             ->filters([
                 //
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

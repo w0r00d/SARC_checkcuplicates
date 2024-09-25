@@ -13,32 +13,34 @@ class DonorsWidget extends ChartWidget
 
     protected function getData(): array
     {
+        /*
+                $data = Trend::model(CashBeneficiary::class)
+                    ->between(
+                        start: now()->startOfYear(),
+                        end: now()->endOfYear(),
+                    )
+                    ->perMonth()
+                    ->count('donor');
 
-        $data = Trend::model(CashBeneficiary::class)
-            ->between(
-                start: now()->startOfYear(),
-                end: now()->endOfYear(),
-            )
-            ->perMonth()
-            ->count('donor');
-
-        return [
-            'datasets' => [
-                [
-                    'label' => 'Blog posts created',
-                    'data' => $data->map(fn (TrendValue $value) => $value->aggregate),
-                    'backgroundColor' => [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)',
-                        'rgb(255, 85, 86)',
-                        'rgb(54, 0, 235)',
-                        'rgb(0, 0, 0)',
+                return [
+                    'datasets' => [
+                        [
+                            'label' => 'Blog posts created',
+                            'data' => $data->map(fn (TrendValue $value) => $value->aggregate),
+                            'backgroundColor' => [
+                                'rgb(255, 99, 132)',
+                                'rgb(54, 162, 235)',
+                                'rgb(255, 205, 86)',
+                                'rgb(255, 85, 86)',
+                                'rgb(54, 0, 235)',
+                                'rgb(0, 0, 0)',
+                            ],
+                        ],
                     ],
-                ],
-            ],
-            'labels' => ['Jan', 'Feb', 'Mar', 'Apr'],
-        ];
+                    'labels' => ['Jan', 'Feb', 'Mar', 'Apr'],
+                ];
+          */
+        return [];
     }
 
     protected function getType(): string
