@@ -2,61 +2,59 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Imports\ProjectImporter;
 use App\Filament\Resources\ProjectResource\Pages;
-use App\Filament\Resources\ProjectResource\RelationManagers;
 use App\Models\Project;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-
-use App\Filament\Imports\ProjectImporter;
 use Filament\Tables\Actions\ImportAction;
+use Filament\Tables\Table;
+
 class ProjectResource extends Resource
 {
     protected static ?string $model = Project::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static bool $shouldRegisterNavigation = false;
+
+    // protected static bool $shouldRegisterNavigation = false;
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                ->required(),
+                    ->required(),
                 Forms\Components\TextInput::make('donor')
-                ->required(),
+                    ->required(),
                 Forms\Components\DatePicker::make('implementation_date')
-                ->required()
-                ->maxDate(now()),
+                    ->required()
+                    ->maxDate(now()),
                 Forms\Components\Select::make('status')
-                ->options([
-                    'Planning' => 'planning',
-                    'pending' => 'pending',
-                    'on going' =>'on going',
-                    'finished' => 'finished',
-                    'stopped' => 'stopped'
+                    ->options([
+                        'Planning' => 'planning',
+                        'pending' => 'pending',
+                        'on going' => 'on going',
+                        'finished' => 'finished',
+                        'stopped' => 'stopped',
 
-                ])
-                ->required(),
+                    ])
+                    ->required(),
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-        ->headerActions([ 
-            ImportAction::make()
-        ->importer(ProjectImporter::class),
-            
-        ])
-        
+            ->headerActions([
+                ImportAction::make()
+                    ->importer(ProjectImporter::class),
+
+            ])
+
             ->columns([
                 //
-               
+
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('donor'),
                 Tables\Columns\TextColumn::make('implementation_date'),

@@ -17,7 +17,7 @@ class CashBeneficiaryResource extends Resource
 {
     protected static ?string $model = CashBeneficiary::class;
 
-    protected static ?string $navigationIcon = 'heroicon-s-user-circle';
+    protected static ?string $navigationIcon = 'heroicon-s-banknotes';
 
     public static function form(Form $form): Form
     {
@@ -64,7 +64,7 @@ class CashBeneficiaryResource extends Resource
     {
         return $table
             ->heading('Beneficaries')
-            ->description('Cash Beneficiaries Data')
+            ->description('Cash Distribution')
             ->headerActions([
                 ImportAction::make()
                     ->importer(CashBeneficiaryImporter::class)
@@ -73,19 +73,25 @@ class CashBeneficiaryResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('national_id')->searchable(),
                 Tables\Columns\TextColumn::make('fullname')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('governate')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('value')
                     ->numeric()
                     ->suffix(' SP')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('transfer_date')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('project')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('donor')
                     ->searchable()
+                    ->sortable()
                     ->badge(),
 
             ])
@@ -94,7 +100,33 @@ class CashBeneficiaryResource extends Resource
             ])
             ->filters([
                 //
+                Tables\Filters\SelectFilter::make('donor')
+                    ->options([
+                        'GRC' => 'GRC',
+                        'DRC' => 'DRC',
+                        'ICRC' => 'ICRC',
+                        'SRC' => 'SRC',
+                    ]),
+                Tables\Filters\SelectFilter::make('governate')
+                    ->multiple()
+                    ->options(['Damascus' => 'Damascus',
+                        'Aleppo' => 'Aleppo',
+                        'Homs' => 'Homs',
+                        'Hama' => 'Hama',
+                        'Latakia' => 'Latakia',
+                        'Tartous' => 'Tartous',
+                        'As-Sweida' => 'As-Sweida',
+                        'Ar-Raqqa' => 'Ar-Raqqa',
+                        'Daraa' => 'Daraa',
+                        'Idleb' => 'Idleb',
+                        'Quneitra' => 'Quneitra',
+                        'Rurla Damascus' => 'Rural Damascus',
+                        'Der-ez-zor' => 'Der-ez-zor', ]),
+                Tables\Filters\SelectFilter::make('transfer_date')
+                    ->form([
+                        Forms\Components\DatePicker::make('transfer_date'),
 
+                    ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
