@@ -94,7 +94,8 @@ class CashBeneficiaryResource extends Resource
                     ->badge(),
 
             ])
-            ->groups(['national_id',
+            ->groups([
+                'national_id',
                 'donor',
             ])
             ->filters([
@@ -128,13 +129,13 @@ class CashBeneficiaryResource extends Resource
                     ]),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
+        //        Tables\Actions\EditAction::make(),
+            ]);
+       /*     ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
+                ]), 
+            ]);*/
     }
 
     public static function infolist(Infolist $infolist): Infolist
@@ -159,8 +160,17 @@ class CashBeneficiaryResource extends Resource
     {
         return [
             'index' => Pages\ListCashBeneficiaries::route('/'),
-            'create' => Pages\CreateCashBeneficiary::route('/create'),
-            'edit' => Pages\EditCashBeneficiary::route('/{record}/edit'),
+          //  'create' => Pages\CreateCashBeneficiary::route('/create'),
+          //  'edit' => Pages\EditCashBeneficiary::route('/{record}/edit'),
         ];
     }
+    public static function canCreate(): bool
+    {
+        if(!auth()->user()->isAdmin())
+            return false;
+
+            return true;
+    }
+    
+  
 }

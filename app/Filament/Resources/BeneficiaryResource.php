@@ -75,8 +75,8 @@ class BeneficiaryResource extends Resource
     {
         return [
             'index' => Pages\ListBeneficiaries::route('/'),
-            'create' => Pages\CreateBeneficiary::route('/create'),
-            'edit' => Pages\EditBeneficiary::route('/{record}/edit'),
+        //    'create' => Pages\CreateBeneficiary::route('/create'),
+          //  'edit' => Pages\EditBeneficiary::route('/{record}/edit'),
         ];
     }
 }

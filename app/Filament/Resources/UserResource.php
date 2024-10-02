@@ -22,17 +22,21 @@ class UserResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
-                    ->maxLength(11),
+                    ->maxLength(100),
                 Forms\Components\TextInput::make('email')
                     ->required()
-                    ->maxLength(11),
+                    ->maxLength(100),
                 Forms\Components\TextInput::make('position_title')
                     ->required()
-                    ->maxLength(11),
+                    ->nullable()
+                    ->maxLength(100),
                 Forms\Components\TextInput::make('password')
+                    ->password()
                     ->required()
+                    ->minLength(8)
                     ->maxLength(11),
                 Forms\Components\Select::make('role')
+                ->nullable()
                     ->options([
                         'admin' => 'admin',
                         'officer' => 'officer',
