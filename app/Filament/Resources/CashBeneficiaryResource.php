@@ -168,7 +168,7 @@ class CashBeneficiaryResource extends Resource
     {
         if(!auth()->user()->isAdmin())
             return false;
-
+        
             return true;
     }
     
