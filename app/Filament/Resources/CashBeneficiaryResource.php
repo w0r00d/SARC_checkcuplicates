@@ -48,8 +48,7 @@ class CashBeneficiaryResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('value')
                     ->required(),
-                Forms\Components\TextInput::make('value')
-                    ->required(),
+
                 Forms\Components\DatePicker::make('transfer_date')
                     ->required(),
                 Forms\Components\TextInput::make('project')

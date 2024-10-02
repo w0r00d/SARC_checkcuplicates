@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('national_id');
             $table->string('fullname');
-            $table->enum('governate', ['Damascus', 'Aleppo', 'Homs', 'Hama','Latakia','Tartous', 'As-Sweida','Ar-Raqqa', 'Daraa', 'Idleb','Quneitra','Rurla Damascus','Der-ez-zor']);
+            $table->enum('governate', ['Damascus', 'Aleppo', 'Homs', 'Hama', 'Latakia', 'Tartous', 'As-Sweida', 'Ar-Raqqa', 'Daraa', 'Idleb', 'Quneitra', 'Rurla Damascus', 'Der-ezzor']);
             $table->integer('value');
             $table->date('transfer_date');
             $table->string('project');
