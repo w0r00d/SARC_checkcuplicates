@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('pending_beneficiaries', function (Blueprint $table) {
             $table->id();
+
             $table->timestamps();
         });
     }
