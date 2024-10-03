@@ -1,4 +1,3 @@
 <x-filament-panels::page>
-    
-<livewire:duplicates />
+    <livewire:deduplicate/>
 </x-filament-panels::page>

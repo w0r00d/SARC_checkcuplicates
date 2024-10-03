@@ -2,23 +2,21 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Imports\CashBeneficiaryImporter;
-use App\Filament\Resources\CashBeneficiaryResource\Pages;
-use App\Models\CashBeneficiary;
-use Filament\Forms;
+use App\Filament\Imports\PendingBeneficiaryImporter;
+use App\Filament\Resources\PendingBeneficiaryResource\Pages;
+use App\Models\PendingBeneficiary;
 use Filament\Forms\Form;
-use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\ActionSize;
 use Filament\Tables;
 use Filament\Tables\Actions\ImportAction;
 use Filament\Tables\Table;
 
-class CashBeneficiaryResource extends Resource
+class PendingBeneficiaryResource extends Resource
 {
-    protected static ?string $model = CashBeneficiary::class;
+    protected static ?string $model = PendingBeneficiary::class;
 
-    protected static ?string $navigationIcon = 'heroicon-s-banknotes';
+    protected static ?string $navigationIcon = 'heroicon-o-question-mark-circle';
 
     public static function form(Form $form): Form
     {
@@ -57,7 +55,6 @@ class CashBeneficiaryResource extends Resource
                 Forms\Components\TextInput::make('donor')
                     ->required(),
             ]);
-
     }
 
     public static function table(Table $table): Table
@@ -67,7 +64,7 @@ class CashBeneficiaryResource extends Resource
             ->description('Cash Distribution')
             ->headerActions([
                 ImportAction::make()
-                    ->importer(CashBeneficiaryImporter::class)
+                    ->importer(PendingBeneficiaryImporter::class)
                     ->label('Import Data')
                     ->icon('heroicon-m-document')
                     ->disabled(! auth()->user()->isAdmin())
@@ -105,58 +102,16 @@ class CashBeneficiaryResource extends Resource
                     ->badge(),
 
             ])
-            ->groups([
-                'national_id',
-                'donor',
-            ])
             ->filters([
                 //
-                Tables\Filters\SelectFilter::make('donor')
-                    ->options([
-                        'GRC' => 'GRC',
-                        'DRC' => 'DRC',
-                        'ICRC' => 'ICRC',
-                        'SRC' => 'SRC',
-                    ]),
-                Tables\Filters\SelectFilter::make('governate')
-                    ->multiple()
-                    ->options(['Damascus' => 'Damascus',
-                        'Aleppo' => 'Aleppo',
-                        'Homs' => 'Homs',
-                        'Hama' => 'Hama',
-                        'Latakia' => 'Latakia',
-                        'Tartous' => 'Tartous',
-                        'As-Sweida' => 'As-Sweida',
-                        'Ar-Raqqa' => 'Ar-Raqqa',
-                        'Daraa' => 'Daraa',
-                        'Idleb' => 'Idleb',
-                        'Quneitra' => 'Quneitra',
-                        'Rurla Damascus' => 'Rural Damascus',
-                        'Der-ez-zor' => 'Der-ez-zor', ]),
-                Tables\Filters\SelectFilter::make('transfer_date')
-                    ->form([
-                        Forms\Components\DatePicker::make('transfer_date'),
-
-                    ]),
             ])
             ->actions([
-                //        Tables\Actions\EditAction::make(),
-            ]);
-        /*     ->bulkActions([
-                 Tables\Actions\BulkActionGroup::make([
-                     Tables\Actions\DeleteBulkAction::make(),
-                 ]),
-             ]);*/
-    }
-
-    public static function infolist(Infolist $infolist): Infolist
-    {
-        return $infolist
-            ->record($this->product)
-            ->schema([
-                // ...
-                Infolists\Components\TextEntry::make('national_id')
-                    ->label('National Id'),
+                Tables\Actions\EditAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
             ]);
     }
 
@@ -169,21 +124,10 @@ class CashBeneficiaryResource extends Resource
 
     public static function getPages(): array
     {
-
         return [
-            'index' => Pages\ListCashBeneficiaries::route('/'),
-            'create' => Pages\CreateCashBeneficiary::route('/create'),
-            //  'edit' => Pages\EditCashBeneficiary::route('/{record}/edit'),
+            'index' => Pages\ListPendingBeneficiaries::route('/'),
+            'create' => Pages\CreatePendingBeneficiary::route('/create'),
+            'edit' => Pages\EditPendingBeneficiary::route('/{record}/edit'),
         ];
-
-    }
-
-    public static function canCreate(): bool
-    {
-        if (! auth()->user()->isAdmin()) {
-            return false;
-        }
-
-        return true;
     }
 }
