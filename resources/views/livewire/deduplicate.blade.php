@@ -2,13 +2,13 @@
 
     hello
 
-
+<!---
     <div class="container mx-auto mt-5">
         <div class="overflow-x-auto">
           <table class="min-w-full table-auto border-collapse border border-gray-300">
             <thead>
                 <tr class="bg-gray-100">
-                  <!-- Center text and use equal width for columns -->
+
                   <th class="w-1/4 border border-gray-300 px-4 py-2 text-center">National Id</th>
                   <th class="w-1/4 border border-gray-300 px-4 py-2 text-center">Fullname</th>
                   <th class="w-1/4 border border-gray-300 px-4 py-2 text-center">Governate</th>
@@ -26,5 +26,18 @@
               </tbody>
           </table>
         </div>
-{{$this->table}}
+
+</div>
+-->
+<button wire:click='viewAll' class="button"> click me to view data </button>
+<div>
+
+    {{$this->message}}
+</div>
+<div>
+    @isset($this->tab)
+    {{$this->tab}}
+
+    @endif
+</div>
 </div>

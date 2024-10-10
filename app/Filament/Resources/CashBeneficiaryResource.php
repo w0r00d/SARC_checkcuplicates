@@ -120,7 +120,8 @@ class CashBeneficiaryResource extends Resource
                     ]),
                 Tables\Filters\SelectFilter::make('governate')
                     ->multiple()
-                    ->options(['Damascus' => 'Damascus',
+                    ->options([
+                        'Damascus' => 'Damascus',
                         'Aleppo' => 'Aleppo',
                         'Homs' => 'Homs',
                         'Hama' => 'Hama',
