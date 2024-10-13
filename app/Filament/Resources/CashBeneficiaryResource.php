@@ -12,6 +12,7 @@ use Filament\Resources\Resource;
 use Filament\Support\Enums\ActionSize;
 use Filament\Tables;
 use Filament\Tables\Actions\ImportAction;
+use Filament\Tables\Columns\Summarizers\Count;
 use Filament\Tables\Table;
 
 class CashBeneficiaryResource extends Resource
@@ -81,7 +82,8 @@ class CashBeneficiaryResource extends Resource
                     ]),
             ])
             ->columns([
-                Tables\Columns\TextColumn::make('national_id')->searchable(),
+                Tables\Columns\TextColumn::make('national_id')->searchable()
+                    ->summarize(Count::make()),
                 Tables\Columns\TextColumn::make('fullname')
                     ->searchable()
                     ->sortable(),
@@ -109,6 +111,7 @@ class CashBeneficiaryResource extends Resource
                 'national_id',
                 'donor',
             ])
+            ->defaultGroup('national_id')
             ->filters([
                 //
                 Tables\Filters\SelectFilter::make('donor')
