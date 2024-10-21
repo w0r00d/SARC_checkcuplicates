@@ -20,7 +20,7 @@ class Deduplicate extends Component implements HasForms, HasTable
     use InteractsWithForms, InteractsWithTable;
     use WithFileUploads;
 
-    public string $message = '';
+    public string $message = 'null';
 
     public $data;
 
@@ -39,12 +39,12 @@ class Deduplicate extends Component implements HasForms, HasTable
 
     public function importCSV()
     {
-
+        $this->message = '0';
         // Validate the file input
         $this->validate([
             'csv_file' => 'required|file|mimes:csv,txt|max:2048', // Ensure it's a CSV file
         ]);
-
+        $this->message = '1';
         // Read the file
         $path = $this->csv_file->getRealPath();
         $file = fopen($path, 'r');
@@ -52,7 +52,7 @@ class Deduplicate extends Component implements HasForms, HasTable
 
         // Empty the previous data
         $this->csv_data = [];
-
+        $this->message = '2';
         // Loop through the CSV rows and store them
         while ($row = fgetcsv($file)) {
             $this->csv_data[] = array_combine($this->headers, $row); // Combine headers with row data
@@ -91,13 +91,6 @@ class Deduplicate extends Component implements HasForms, HasTable
             ->groupBy('beneficiaries_view.national_id', 'fullname')
             ->get();
 
-        /*
-                $this->data2 = DB::table('cash_beneficiaries')
-                    ->join('pending_beneficiaries', 'cash_beneficiaries.national_id', '=', 'pending_beneficiaries.national_id')
-                    ->select('pending_beneficiaries.national_id', DB::raw('count(cash_beneficiaries.national_id) as p_count'))
-                    ->groupby('pending_beneficiaries.national_id')
-                    ->get();
-        */
     }
 
     public function viewAll()

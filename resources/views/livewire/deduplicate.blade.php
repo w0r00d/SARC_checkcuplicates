@@ -4,7 +4,7 @@
 
     <div class="container mx-auto mt-5">
         <div class="overflow-x-auto">
-
+            {{$this->message}}
             <form wire:submit.prevent="importCSV">
                 @if (session()->has('message'))
             <div class="alert alert-success">
@@ -86,7 +86,7 @@
 data is here
 {{count($this->csv_data)}}
 @endif
-    {{$this->message}}
+
 </div>
 <div>
 
